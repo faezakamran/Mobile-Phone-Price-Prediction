@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+	<script>
+		function getBrand() {
+			var brnd = document.getElementById("brand").value;
+			
+			if(brnd == "select-brand") {
+				window.alert("Please select a brand");
+			}
+			else if(brnd == "Acer") {
+				document.getElementById("alcatel-h3").style.display = "none";
+				document.getElementById("alcatel-model").style.display = "none";
+			}
+			else {
+				document.getElementById("acer-h3").style.display = "none";
+				document.getElementById("acer-model").style.display = "none";
+			}
+		}
+		
+		function getModel() {
+			var acer_disp = document.getElementById("acer-model").style.display;
+			var alcatel_disp = document.getElementById("alcatel-model").style.display;
+			var acer = document.getElementById("acer-model").value;
+			var alcatel = document.getElementById("alcatel-model").value;
+			
+			if(acer_disp == "None") {
+				if(alcatel == "select-alcatel-model") {
+					window.alert("Please select an Alcatel Model");
+				}
+			}
+			else {
+				if(alcatel == "select-acer-model") {
+					window.alert("Please select an Acer Model");
+				}
+			}
+		}
+	</script>
+</head>
+
+<body>
+
+    <div style="color:White">
+        <form action="{{ url_for('predict')}}" method="post">
+            <h2>Mobile Phone Price Prediction</h2>
+            <h3>Brand</h3><br><select name="brand" id="brand" required="required" onchange="getBrand()">
+				<option value="select-brand">Select Brand</option>
+                <option value="Acer">Acer</option>
+                <option value="alcatel">alcatel</option>
+            </select>
+			<h3 id="acer-h3">Model</h3><br><select name="acer-model" id="acer-model" required="required" onchange="getModel()">
+				<option value="select-acer-model">Select Model</option>
+				<option value="Iconia Tab 7 A1-713">Iconia Tab 7 A1-713</option>
+				<option value="Iconia Tab 7 A1-713HD">Iconia Tab 7 A1-713HD</option>
+				<option value="Iconia B1-721">Iconia B1-721</option>
+			</select>
+			<h3 id="alcatel-h3">Model</h3><br><select name="alcatel-model" id="alcatel-model" required="required" onchange="getModel()">
+				<option value="select-alcatel-model">Select Model</option>
+				<option value="Fire 7">Fire 7</option>
+				<option value="One Touch T10">One Touch T10</option>
+			</select>
+			<h3>Primary Camera</h3><br><select name="primary-camera" id="primary-camera" required="required">
+                <option value="2 MP">2 MP</option>
+                <option value="3.15 MP">3.15 MP</option>
+                <option value="VGA">VGA</option>
+				<option value="5 MP">5 MP</option>
+            </select>
+			<h3>Secondary Camera</h3><br><select name="secondary-camera" id="secondary-camera" required="required">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+				<option value="VGA">VGA</option>
+            </select>
+			<h3>CPU</h3><br><select name="CPU" id="CPU" required="required">
+                <option value="Quad core">Quad-core</option>
+                <option value="Dual core 1.3 GHz Cortex A7">Dual-core 1.3 GHz Cortex-A7</option>
+				<option value="Dual core 1.2 GHz">Dual-core 1.2 GHz</option>
+				<option value="1.0 GHz Cortex-A8">1.0 GHz Cortex-A8</option>
+				<option value="Brown">Brown</option>
+            </select>
+			<h3>RAM</h3><br><select name="RAM" id="RAM" required="required">
+                <option value="1 GB RAM">1 GB RAM</option>
+                <option value="16 MB RAM">16 MB RAM</option>
+				<option value="4 MB RAM">4 MB RAM</option>
+            </select>
+			<h3>OS</h3><br><select name="OS" id="OS" required="required">
+                <option value="Android 4.2.2 (Jelly Bean)">Android 4.2.2 (Jelly Bean)</option>
+                <option value="Android 4.4.2 (KitKat)">Android 4.4.2 (KitKat)</option>
+				<option value="Android 4.2 (Jelly Bean)">Android 4.2 (Jelly Bean)</option>
+				<option value="Firefox OS 1.3">Firefox OS 1.3</option>
+				<option value="Android 4.0.3 (Ice Cream Sandwich)">Android 4.0.3 (Ice Cream Sandwich)</option>
+            </select>
+
+            <br><br><button id="sub" type="submit ">Calculate Price</button>
+            <br>
+
+        </form>
+
+        <br><br><h3>{{ prediction_text }}<h3>
+    </div>
+
+
+
+
+    <style>
+        body {
+            background-color: lightslategray;
+            text-align: center;
+            padding: 0px;
+        }
+        
+        #research {
+            font-size: 18px;
+            width: 100px;
+            height: 23px;
+            top: 23px;
+        }
+        
+        #box {
+            border-radius: 60px;
+            border-color: 45px;
+            border-style: solid;
+            font-family: cursive;
+            text-align: center;
+            background-color: rgb(168, 131, 61);
+            font-size: medium;
+            position: absolute;
+            width: 700px;
+            bottom: 9%;
+            height: 850px;
+            right: 30%;
+            padding: 0px;
+            margin: 0px;
+            font-size: 14px;
+        }
+        
+        #fuel {
+            width: 83px;
+            height: 43px;
+            text-align: center;
+            border-radius: 14px;
+            font-size: 20px;
+        }
+        
+        #fuel:hover {
+            background-color: coral;
+        }
+        
+        #research {
+            width: 99px;
+            height: 43px;
+            text-align: center;
+            border-radius: 14px;
+            font-size: 18px;
+        }
+        
+        #research:hover {
+            background-color: coral;
+        }
+        
+        #resea {
+            width: 99px;
+            height: 43px;
+            text-align: center;
+            border-radius: 14px;
+            font-size: 18px;
+        }
+        
+        #resea:hover {
+            background-color: coral;
+        }
+        
+        #sub {
+            width: 120px;
+            height: 43px;
+            text-align: center;
+            border-radius: 14px;
+            font-size: 18px;
+        }
+        
+        #sub:hover {
+            background-color: darkcyan;
+        }
+        
+        #first {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+        
+        #second {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+        
+        #third {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+        
+        #fourth {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+    </style>
+</body>
+
+</html>
