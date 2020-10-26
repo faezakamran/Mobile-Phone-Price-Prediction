@@ -37,7 +37,7 @@ def predict():
         
         prediction=model.predict(encoded_data_df)
         output=round(prediction[0],2)
-        print(prediction)
+        print(output)
 
         return render_template('index.html',prediction_text="Predicted price is €".format(output))
     else:
@@ -53,11 +53,17 @@ def get_data(br, md, pc, sc, cpu, ram, os):
 
 def encode_categorical_data(new_features):
     
-    enc = OrdinalEncoder().fit(new_features)
-    encoded_features = enc.transform(new_features)
+    # enc = OrdinalEncoder().fit(new_features)
+    # encoded_features = enc.transform(new_features)
     
-    #encoded_features = pd.get_dummies(new_features)
+    # #encoded_features = pd.get_dummies(new_features)
     
+    file = open("enc.obj",'rb')
+    enc_loaded = pickle.load(file)
+    file.close()
+    
+    encoded_features = enc_loaded.transform(new_features)
+        
     return encoded_features
 
 if __name__=="__main__":
