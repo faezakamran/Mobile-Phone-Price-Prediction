@@ -37,9 +37,8 @@ def predict():
         
         prediction=model.predict(encoded_data_df)
         output=round(prediction[0],2)
-        print(output)
 
-        return render_template('index.html',prediction_text="Predicted price is €".format(output))
+        return render_template('index.html',prediction_text="Predicted price is {0:.2f} €".format(output))
     else:
         return render_template('index.html')
         
